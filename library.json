@@ -1,0 +1,12 @@
+{
+    "id": "{0A3A3797-337F-A811-42DD-C645C0591393}",
+    "name": "DWIPSLib",
+    "author": "Daniel Weber",
+    "url": "https://github.com/Daniel81W/DWIPSLib.git",
+    "compatibility": {
+        "version": "5.4"
+    },
+    "version": "0.1",
+    "build": 0,
+    "date": 0
+}
