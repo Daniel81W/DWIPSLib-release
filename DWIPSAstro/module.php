@@ -5,6 +5,7 @@
 		{
 			//Never delete this line!
 			parent::Create();
+			$this->RegisterVariableInteger("sunrise", "sunrise");
 		}
 
 		public function Destroy()
@@ -19,4 +20,14 @@
 			parent::ApplyChanges();
 		}
 
+		/**
+        * Die folgenden Funktionen stehen automatisch zur Verfügung, wenn das Modul über die "Module Control" eingefügt wurden.
+        * Die Funktionen werden, mit dem selbst eingerichteten Prefix, in PHP und JSON-RPC wiefolgt zur Verfügung gestellt:
+        *
+        * DWIPSASTRO_UpdateSunrise($id);
+        *
+        */
+        public function UpdateSunrise() {
+            // Selbsterstellter Code
+        }
 	}
