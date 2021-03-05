@@ -6,6 +6,8 @@
 			//Never delete this line!
 			parent::Create();
 			$this->RegisterVariableInteger("sunrise", "sunrise");
+			$this->RegisterPropertyFloat("Latitude", 50.0);
+			$this->RegisterPropertyFloat("Longitude", 9.0);
 		}
 
 		public function Destroy()
@@ -18,6 +20,8 @@
 		{
 			//Never delete this line!
 			parent::ApplyChanges();
+
+			
 		}
 
 		/**
@@ -28,6 +32,7 @@
         *
         */
         public function UpdateSunrise() {
-            // Selbsterstellter Code
+            $this->SetValue("sunrise", 5);
         }
 	}
+	?>
