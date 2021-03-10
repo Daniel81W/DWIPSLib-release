@@ -1,6 +1,6 @@
 <?php
 
-	include_once("../libs/astro.php");
+	include_once("./libs/astro.php");
 	class DWIPSAstro extends IPSModule {
 
 		public function Create()
