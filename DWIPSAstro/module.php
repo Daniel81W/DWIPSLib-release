@@ -88,6 +88,6 @@
 			$this->SetValue("startastronomicaltwilight", ASTROSUN::Sunrise($solarNoon, $hourangleAtAstronomicalTwilight));
 			$this->SetValue("stopnastronomicaltwilight", ASTROSUN::Sunset($solarNoon, $hourangleAtAstronomicalTwilight));
    
-        }
+		}
 	}
 	?
