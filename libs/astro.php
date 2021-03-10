@@ -162,6 +162,10 @@ class ASTROSUN{
         return rad2deg(acos(cos(deg2rad(90.833))/(cos(deg2rad($latitude))*cos(deg2rad($declinaton)))-tan(deg2rad($latitude))*tan(deg2rad($declinaton))));
     }
 
+    public static function HourAngleAtElevation(float $sunElevation, float $latitude, float $declinaton){
+        return rad2deg(acos(cos(deg2rad(90 - $sunElevation))/(cos(deg2rad($latitude))*cos(deg2rad($declinaton)))-tan(deg2rad($latitude))*tan(deg2rad($declinaton))));
+    }
+
     /**
      * 
      */
@@ -208,7 +212,76 @@ class ASTROSUN{
         }
     }
 
+    /**
+     * 
+     */
+    public static function SolarZenith(float $declination, float $hourAngle, float $lat){
+        return rad2deg(
+            acos(sin(deg2rad($lat))*sin(deg2rad($declination))+cos(deg2rad($lat))*cos(deg2rad($declination))*cos(deg2rad($hourAngle)))
+        );
+    }
 
+    /**
+     * 
+     */
+    public static function SolarElevation(float $solarZenith){
+        return 90 - $solarZenith;
+    }
+
+    /**
+     * 
+     */
+    public static function SolarAzimut(float $declination, float $hourAngle, float $solarZenith,float $latitude){
+        if ($hourAngle>0){
+            return fmod(
+                rad2deg(
+                    acos(
+                        (
+                            (
+                                sin(
+                                    deg2rad($latitude)
+                                ) * cos(
+                                    deg2rad($solarZenith)
+                                )
+                            ) - sin(
+                                deg2rad($declination)
+                            )
+                        ) / (
+                            cos(
+                                deg2rad($latitude)
+                            ) * sin(
+                                deg2rad($solarZenith)
+                            )
+                        )
+                    )
+                )+180,360
+            );
+        }else{
+            return fmod(
+                540 - rad2deg(
+                    acos(
+                        (
+                            (
+                                sin(
+                                    deg2rad($latitude)
+                                ) * cos(
+                                    deg2rad($solarZenith)
+                                )
+                            ) - sin(
+                                deg2rad($declination)
+                            )
+                        ) / (
+                            cos(
+                                deg2rad($latitude)
+                            ) * sin(
+                                deg2rad($solarZenith)
+                            )
+                        )
+                    )
+                ),360
+            );
+        }
+    }
 
 
     public static function SunriseForDateAndLocation(int $year, int $month, int $day, float $lat, float $long, int $timezone){
@@ -233,7 +306,8 @@ class ASTROSUN{
         $sunrise = ASTROSUN::Sunrise($solarnoon, $HA);
         $sunlight = ASTROSUN::SunlightDuration($HA);
         $trueSolarTime = ASTROSUN::TrueSolarTime(0.25, $eqOfT, $long, $timezone);
-        return $trueSolarTime;
+        
+        return mktime(0,0,$sunrise*24*60*60,$month,$day,$year);
     }
 }
 ?>

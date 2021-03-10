@@ -5,7 +5,7 @@
             "name": "Latitude", 
             "caption": "Latitude", 
             "digits": 4
-        }
+        },
     	{ 
             "type": "NumberSpinner", 
             "name": "Longitude", 
